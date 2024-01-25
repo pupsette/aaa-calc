@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Axis&amp;Allies battle calculator</title>
+  </head>
+  <body>
+  <style>
+  @import url('https://fonts.googleapis.com/css2?family=Kreon:wght@600&display=swap');
+  </style>
+    <style>
+      :root {
+        --main-bg-color: #764027;
+        --dark-bg-color: #3d3d32;
+      }
+      .hidden {
+        display: none;
+      }
+      * {
+        font-family: 'Kreon', serif;
+        text-shadow: 2px 2px 2px #000;
+        box-sizing:border-box;
+      }
+      body {
+        margin: 0px;
+        padding: 0px;
+        background-color: var(--main-bg-color);
+        color: #fff;
+      }
+      h1, h2 {
+        padding-left: 10px;
+        box-shadow: 0px 0px 10px 4px #000a;
+        background-color: var(--dark-bg-color);
+        color: #fff;
+        border-top: 2px solid #c6ae3c;
+        border-bottom: 2px solid #c6ae3c;
+      }
+      h1, h2 {
+        margin-top: 30px;
+      }
+      h2 {
+       margin-bottom: 0px;
+      }
+      td.result-case {
+        padding-left: 25px;
+        padding-right: 25px;
+      }
+      input {
+        text-shadow: none;
+      }
+      table.init {
+        display: inline;
+        margin-left: 30px;
+      }
+      table, th, tr, td {
+        margin: 0px;
+        padding: 0px;
+        border-spacing: 0px;
+      }
+      table th {
+        background-color: #00000020;
+      }
+      th, td {
+        padding-left: 10px;
+        padding-right: 10px;
+        padding-top: 2px;
+        padding-bottom: 2px;
+        text-align: right;
+      }
+      td {
+        vertical-align: top;
+      }
+      input.attacker::-webkit-inner-spin-button, input.defender::-webkit-inner-spin-button {
+        opacity: 1
+      }
+    </style>
+    <h1>Axis &amp; Allies: Second Edition battle calculator!</h1>
+    <table class="init">
+      <tr>
+        <th>Unit Type</th>
+        <th>Attacker</th>
+        <th>Defender</th>
+      </tr>
+      <tr class="inf">
+        <td>Infantry</td>
+        <td>
+          <input type="number" value="0" min="0" max="999" class="attacker"/>
+        </td>
+        <td>
+          <input type="number" value="0" min="0" max="999" class="defender"/>
+        </td>
+      </tr>
+      <tr class="art">
+        <td>Artillery</td>
+        <td>
+          <input type="number" value="0" min="0" max="999" class="attacker"/>
+        </td>
+        <td>
+          <input type="number" value="0" min="0" max="999" class="defender"/>
+        </td>
+      </tr>
+      <tr class="tank">
+        <td>Tanks</td>
+        <td>
+          <input type="number" value="0" min="0" max="999" class="attacker"/>
+        </td>
+        <td>
+          <input type="number" value="0" min="0" max="999" class="defender"/>
+        </td>
+      </tr>
+      <tr class="fighter">
+        <td>Fighter</td>
+        <td>
+          <input type="number" value="0" min="0" max="999" class="attacker"/>
+        </td>
+        <td>
+          <input type="number" value="0" min="0" max="999" class="defender"/>
+        </td>
+      </tr>
+      <tr class="bomber">
+        <td>Bomber</td>
+        <td>
+          <input type="number" value="0" min="0" max="999" class="attacker"/>
+        </td>
+        <td>
+          <input type="number" value="0" min="0" max="999" class="defender"/>
+        </td>
+      </tr>
+      <tr class="aa">
+        <td>Anti-Air gun</td>
+        <td>
+          <input type="number" value="0" min="0" max="999" class="attacker"/>
+        </td>
+        <td>
+          <input type="number" value="0" min="0" max="999" class="defender"/>
+        </td>
+      </tr>
+    </table>
+    <table class="init">
+      <tr>
+        <th>Unit Type</th>
+        <th>Attacker</th>
+        <th>Defender</th>
+      </tr>
+      <tr class="transport">
+        <td>Transport</td>
+        <td>
+          <input type="number" value="0" min="0" max="999" class="attacker"/>
+        </td>
+        <td>
+          <input type="number" value="0" min="0" max="999" class="defender"/>
+        </td>
+      </tr>
+      <tr class="sub">
+        <td>Submarine</td>
+        <td>
+          <input type="number" value="0" min="0" max="999" class="attacker"/>
+        </td>
+        <td>
+          <input type="number" value="0" min="0" max="999" class="defender"/>
+        </td>
+      </tr>
+      <tr class="destroyer">
+        <td>Destroyer</td>
+        <td>
+          <input type="number" value="0" min="0" max="999" class="attacker"/>
+        </td>
+        <td>
+          <input type="number" value="0" min="0" max="999" class="defender"/>
+        </td>
+      </tr>
+      <tr class="cruiser">
+        <td>Cruiser</td>
+        <td>
+          <input type="number" value="0" min="0" max="999" class="attacker"/>
+        </td>
+        <td>
+          <input type="number" value="0" min="0" max="999" class="defender"/>
+        </td>
+      </tr>
+      <tr class="carrier">
+        <td>Carrier</td>
+        <td>
+          <input type="number" value="0" min="0" max="999" class="attacker"/>
+        </td>
+        <td>
+          <input type="number" value="0" min="0" max="999" class="defender"/>
+        </td>
+      </tr>
+      <tr class="bb">
+        <td>Battleship</td>
+        <td>
+          <input type="number" value="0" min="0" max="999" class="attacker"/>
+        </td>
+        <td>
+          <input type="number" value="0" min="0" max="999" class="defender"/>
+        </td>
+      </tr>
+    </table>
+    <h2>Results</h2>
+    <table>
+      <tr>
+        <td class="result-case">
+          <h3>Best case for attacker</h3>
+          <table class="result best">
+            <tr>
+              <th>&nbsp;</th>
+              <th>Attacker</th>
+              <th>Defender</th>
+            </tr>
+            <tr class="inf hidden">
+              <td>Infantry</td>
+              <td class="attacker"></td>
+              <td class="defender"></td>
+            </tr>
+            <tr class="art hidden">
+              <td>Artillery</td>
+              <td class="attacker"></td>
+              <td class="defender"></td>
+            </tr>
+            <tr class="tank hidden">
+              <td>Tanks</td>
+              <td class="attacker"></td>
+              <td class="defender"></td>
+            </tr>
+            <tr class="fighter hidden">
+              <td>Fighter</td>
+              <td class="attacker"></td>
+              <td class="defender"></td>
+            </tr>
+            <tr class="bomber hidden">
+              <td>Bomber</td>
+              <td class="attacker"></td>
+              <td class="defender"></td>
+            </tr>
+            <tr class="aa hidden">
+              <td>Anti-Air gun</td>
+              <td class="attacker"></td>
+              <td class="defender"></td>
+            </tr>
+            <tr class="transport hidden">
+              <td>Transport</td>
+              <td class="attacker"></td>
+              <td class="defender"></td>
+            </tr>
+            <tr class="sub hidden">
+              <td>Submarine</td>
+              <td class="attacker"></td>
+              <td class="defender"></td>
+            </tr>
+            <tr class="destroyer hidden">
+              <td>Destroyer</td>
+              <td class="attacker"></td>
+              <td class="defender"></td>
+            </tr>
+            <tr class="cruiser hidden">
+              <td>Cruiser</td>
+              <td class="attacker"></td>
+              <td class="defender"></td>
+            </tr>
+            <tr class="carrier hidden">
+              <td>Carrier</td>
+              <td class="attacker"></td>
+              <td class="defender"></td>
+            </tr>
+            <tr class="bb hidden">
+              <td>Battleship</td>
+              <td class="attacker"></td>
+              <td class="defender"></td>
+            </tr>
+            <tr class="units-left">
+              <td>Units left</td>
+              <td class="attacker"></td>
+              <td class="defender"></td>
+            </tr>
+            <tr class="ipc-loss">
+              <td>IPC loss</td>
+              <td class="attacker"></td>
+              <td class="defender"></td>
+            </tr>
+          </table>
+        </td>
+        <td class="result-case">
+          <h3>Average case</h3>
+          <table class="result avg">
+            <tr>
+              <th>&nbsp;</th>
+              <th>Attacker</th>
+              <th>Defender</th>
+            </tr>
+            <tr class="inf hidden">
+              <td>Infantry</td>
+              <td class="attacker"></td>
+              <td class="defender"></td>
+            </tr>
+            <tr class="art hidden">
+              <td>Artillery</td>
+              <td class="attacker"></td>
+              <td class="defender"></td>
+            </tr>
+            <tr class="tank hidden">
+              <td>Tanks</td>
+              <td class="attacker"></td>
+              <td class="defender"></td>
+            </tr>
+            <tr class="fighter hidden">
+              <td>Fighter</td>
+              <td class="attacker"></td>
+              <td class="defender"></td>
+            </tr>
+            <tr class="bomber hidden">
+              <td>Bomber</td>
+              <td class="attacker"></td>
+              <td class="defender"></td>
+            </tr>
+            <tr class="aa hidden">
+              <td>Anti-Air gun</td>
+              <td class="attacker"></td>
+              <td class="defender"></td>
+            </tr>
+            <tr class="transport hidden">
+              <td>Transport</td>
+              <td class="attacker"></td>
+              <td class="defender"></td>
+            </tr>
+            <tr class="sub hidden">
+              <td>Submarine</td>
+              <td class="attacker"></td>
+              <td class="defender"></td>
+            </tr>
+            <tr class="destroyer hidden">
+              <td>Destroyer</td>
+              <td class="attacker"></td>
+              <td class="defender"></td>
+            </tr>
+            <tr class="cruiser hidden">
+              <td>Cruiser</td>
+              <td class="attacker"></td>
+              <td class="defender"></td>
+            </tr>
+            <tr class="carrier hidden">
+              <td>Carrier</td>
+              <td class="attacker"></td>
+              <td class="defender"></td>
+            </tr>
+            <tr class="bb hidden">
+              <td>Battleship</td>
+              <td class="attacker"></td>
+              <td class="defender"></td>
+            </tr>
+            <tr class="units-left">
+              <td>Units left</td>
+              <td class="attacker"></td>
+              <td class="defender"></td>
+            </tr>
+            <tr class="ipc-loss">
+              <td>IPC loss</td>
+              <td class="attacker"></td>
+              <td class="defender"></td>
+            </tr>
+          </table>
+        </td>
+        <td class="result-case">
+          <h3>Worst case for attacker</h3>
+          <table class="result worst">
+            <tr>
+              <th>&nbsp;</th>
+              <th>Attacker</th>
+              <th>Defender</th>
+            </tr>
+            <tr class="inf hidden">
+              <td>Infantry</td>
+              <td class="attacker"></td>
+              <td class="defender"></td>
+            </tr>
+            <tr class="art hidden">
+              <td>Artillery</td>
+              <td class="attacker"></td>
+              <td class="defender"></td>
+            </tr>
+            <tr class="tank hidden">
+              <td>Tanks</td>
+              <td class="attacker"></td>
+              <td class="defender"></td>
+            </tr>
+            <tr class="fighter hidden">
+              <td>Fighter</td>
+              <td class="attacker"></td>
+              <td class="defender"></td>
+            </tr>
+            <tr class="bomber hidden">
+              <td>Bomber</td>
+              <td class="attacker"></td>
+              <td class="defender"></td>
+            </tr>
+            <tr class="aa hidden">
+              <td>Anti-Air gun</td>
+              <td class="attacker"></td>
+              <td class="defender"></td>
+            </tr>
+            <tr class="transport hidden">
+              <td>Transport</td>
+              <td class="attacker"></td>
+              <td class="defender"></td>
+            </tr>
+            <tr class="sub hidden">
+              <td>Submarine</td>
+              <td class="attacker"></td>
+              <td class="defender"></td>
+            </tr>
+            <tr class="destroyer hidden">
+              <td>Destroyer</td>
+              <td class="attacker"></td>
+              <td class="defender"></td>
+            </tr>
+            <tr class="cruiser hidden">
+              <td>Cruiser</td>
+              <td class="attacker"></td>
+              <td class="defender"></td>
+            </tr>
+            <tr class="carrier hidden">
+              <td>Carrier</td>
+              <td class="attacker"></td>
+              <td class="defender"></td>
+            </tr>
+            <tr class="bb hidden">
+              <td>Battleship</td>
+              <td class="attacker"></td>
+              <td class="defender"></td>
+            </tr>
+            <tr class="units-left">
+              <td>Units left</td>
+              <td class="attacker"></td>
+              <td class="defender"></td>
+            </tr>
+            <tr class="ipc-loss">
+              <td>IPC loss</td>
+              <td class="attacker"></td>
+              <td class="defender"></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/umbrellajs"></script>
+    <script type="text/javascript">
+      const unitTypes  = [ "inf", "art", "tank", "fighter", "bomber", "aa", "transport", "sub", "destroyer", "cruiser", "carrier", "bb" ];
+      const unitCosts  = [     3,     4,      5,        10,       12,    5,           7,     6,           8,        12,        14,   20 ];
+      const unitAttack = [     1,     2,      3,         3,        4,    0,           0,     2,           2,         3,         1,    4 ];
+      const unitDefense= [     2,     2,      3,         4,        1,    0,           0,     1,           2,         3,         2,    4 ];
+      const ool = [ "bbdmg", "aa", "inf", "art", "tank", "sub", "destroyer", "fighter", "bomber", "cruiser", "carrier", "bb" ];
+      function getInitialCount(selector) {
+        var val = parseInt(u(selector).first().value);
+        return isNaN(val) ? 0 : val;
+      }
+      function create(other) {
+        let obj = {
+          count: function() {
+            let sum = 0;
+            for (let i = 0; i < unitTypes.length; i++) {
+              sum += this[unitTypes[i]];
+            }
+            return sum;
+          },
+          attackerValue: function(excludeSubs) {
+            let val = 0;
+            for (let i = 0; i < unitTypes.length; i++) {
+              if (excludeSubs && unitTypes[i] == "sub")
+                continue;
+              val += this[unitTypes[i]] * unitAttack[i];
+              if (i == 0)
+                val += Math.min(this.inf, this.art);
+            }
+            return val;
+          },
+          defenderValue: function(excludeSubs) {
+            let val = 0;
+            for (let i = 0; i < unitTypes.length; i++) {
+              if (excludeSubs && unitTypes[i] == "sub")
+                continue;
+              val += this[unitTypes[i]] * unitDefense[i];
+            }
+            return val;
+          },
+          init: function(selector) {
+            let obj = this;
+            unitTypes.forEach(unitType => {
+              obj[unitType] = getInitialCount(".init ." + unitType + " " + selector);
+            });
+          },
+          removeAntiAirCasualties: function(hits) {
+            var typeLoss = 0;
+            ["fighter", "bomber"].forEach(unitType => {
+              typeLoss = Math.min(this[unitType], hits);
+              this[unitType] -= typeLoss;
+              hits -= typeLoss;
+            });
+          },
+          removeCasualties: function(hits) {
+            var typeLoss = 0;
+            if (hits <= 0)
+              return;
+            ool.forEach(unitType => {
+              typeLoss = Math.min(this[unitType], hits);
+              this[unitType] -= typeLoss;
+              hits -= typeLoss;
+            });
+
+            if (hits > 0)
+              this.transport = 0;
+          },
+          round: function() {
+            unitTypes.forEach(unitType => this[unitType] = Math.round(this[unitType]));
+          },
+          ipc: function() {
+            let obj = this;
+            let sum = 0;
+            unitTypes.forEach((unitType, i) => sum += obj[unitType] * unitCosts[i]);
+            return sum;
+          }
+        };
+        
+        unitTypes.forEach(function(unitType) {
+          obj[unitType] = other ? (other[unitType] ?? 0) : 0;
+        });
+
+        obj.bbdmg = obj.bb;
+        return obj;
+      }
+      function displayResult(type, attacker, defender) {
+        let el = u(".result." + type);
+        unitTypes.forEach(unitType => {
+          let countAtt = attacker[unitType];
+          let countDef = defender[unitType];
+          let elRow = el.find("tr." + unitType);
+          if (countAtt + countDef == 0) {
+            elRow.removeClass("hidden");
+            elRow.addClass("hidden");
+          }
+          else {
+            elRow.removeClass("hidden");
+            elRow.find("td.attacker").text(countAtt.toString());
+            elRow.find("td.defender").text(countDef.toString());
+          }
+        });
+      }
+      function calc(initialAttackers, initialDefenders, type) {
+        var attackers = create(initialAttackers);
+        var defenders = create(initialDefenders);
+        var goodLuck = function(val) { return Math.ceil(val / 6.0); };
+        var badLuck = function(val) { return Math.trunc(val / 6.0); };
+        var average = function(val) { return val / 6.0; };
+        
+        var attackerRoll = average;
+        var defenderRoll = average;
+        if (type == "best") {
+          attackerRoll = goodLuck;
+          defenderRoll = badLuck;
+        }
+        else if (type == "worst") {
+          attackerRoll = badLuck;
+          defenderRoll = goodLuck;
+        }
+        var round=0;
+        var ipcLossAttacker=0;
+        var ipcLossDefender=0;
+        
+        while (attackers.count() > 0 && defenders.count() > 0 && round <= 10) {
+          if (round == 0 && defenders.aa > 0) {
+            attackers.removeAntiAirCasualties(defenderRoll(attackers.fighter + attackers.bomber));
+          }
+          
+          // submarine first strike
+          let tmpSubAtt = 0;
+          if (attackers.sub > 0 && defenders.destroyer == 0) {
+            tmpSubAtt = attackers.sub * 2.0;
+          }
+          let tmpSubDef = 0;
+          if (defenders.sub > 0 && attackers.destroyer == 0) {
+            tmpSubDef = defenders.sub * 1.0;
+          }
+          defenders.removeCasualties(attackerRoll(tmpSubAtt));
+          attackers.removeCasualties(defenderRoll(tmpSubDef));
+
+          var tmpA = attackers.attackerValue(tmpSubAtt > 0);
+          var tmpD = defenders.defenderValue(tmpSubDef > 0);
+          if ((tmpA + tmpSubAtt) == 0 && (tmpD + tmpSubDef) > 0)
+            attackers.removeCasualties(attackers.count());
+          else if ((tmpD + tmpSubDef) == 0 && (tmpA + tmpSubAtt) > 0)
+            defenders.removeCasualties(defenders.count());
+          else {
+            attackers.removeCasualties(defenderRoll(tmpD));
+            defenders.removeCasualties(attackerRoll(tmpA));
+          }
+          round++;
+        }
+        attackers.round();
+        defenders.round();
+        displayResult(type, attackers, defenders);
+        u(".result." + type + " .units-left td.attacker").text(attackers.count().toString());
+        u(".result." + type + " .units-left td.defender").text(defenders.count().toString());
+        u(".result." + type + " .ipc-loss td.attacker").text(attackers.ipc() - initialAttackers.ipc());
+        u(".result." + type + " .ipc-loss td.defender").text(defenders.ipc() - initialDefenders.ipc());
+      }
+      function calcAll() {
+        var initialAttackers = create();
+        initialAttackers.init(".attacker");
+        var initialDefenders = create();
+        initialDefenders.init(".defender");
+
+        calc(initialAttackers, initialDefenders, "best");
+        calc(initialAttackers, initialDefenders, "avg");
+        calc(initialAttackers, initialDefenders, "worst");
+      }
+      u('input').on('change', calcAll);
+    </script>
+  </body>
+</html>
