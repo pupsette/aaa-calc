@@ -568,7 +568,10 @@
         
         while (attackers.count() > 0 && defenders.count() > 0 && round <= 10) {
           if (round == 0 && defenders.aa > 0) {
-            attackers.removeAntiAirCasualties(defenderRoll(attackers.fighter + attackers.bomber));
+            // Anti-aircraft guns roll at 3, but the sum must not exceed the total number 
+            // of attacking airplanes.
+            let tmpAaAttack = Math.min(defenders.aa * 3.0, attackers.fighter + attackers.bomber);
+            attackers.removeAntiAirCasualties(defenderRoll(tmpAaAttack));
           }
           
           // submarine first strike
